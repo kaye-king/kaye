@@ -1,0 +1,77 @@
+# Gallery Section
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+<body>
+    <div class="header">Profile Page</div>
+    <div class="container">
+        <div class="sidebar">
+            <a href="about.html" >About Me</a>
+            <a href="subjects.html">Subjects Taken</a>
+            <a href="enrolled.html">Enrolled Subjects</a>
+            <a href="contact.html">Contact Me</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="gallery.html"class="active">Gallery</a>
+        </div>
+        <div class="content"></div>
+    </div>
+    <script>
+        let currentIndex = 0;
+
+        function showCarousel() {
+            const images = document.querySelectorAll('.carousel-image');
+            const totalImages = images.length;
+
+            const updateCarousel = () => {
+                const offset = -currentIndex * 100;
+                document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+            };
+
+            document.querySelector('.next').onclick = () => {
+                currentIndex = (currentIndex + 1) % totalImages;
+                updateCarousel();
+            };
+
+            document.querySelector('.prev').onclick = () => {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                updateCarousel();
+            };
+
+            updateCarousel();
+        }
+
+        function showSection(section) {
+            const content = document.querySelector('.content');
+            if (section === 'gallery') {
+                content.innerHTML = `
+                    <h2>Gallery</h2>
+                    <div class="carousel">
+                        <div class="carousel-images">
+                   <img src="kk.jpg" alt="Image 1" class="carousel-image">
+<img src="mm.jpg" alt="Image 2" class="carousel-image">
+<img src="nn.jpg" alt="Image 3" class="carousel-image">
+<img src="pp.jpg" alt="Image 4" class="carousel-image">
+<img src="aa.jpg" alt="Image 5" class="carousel-image">
+<img src="a.jpg" alt="Image 6" class="carousel-image">
+<img src="bb.jpg" alt="Image 7" class="carousel-image">
+<img src="cc.jpg" alt="Image 8" class="carousel-image">
+<img src="dd.jpg" alt="Image 9" class="carousel-image">
+<img src="image10.jpg" alt="Image 10" class="carousel-image">
+                        </div>
+                        <button class="prev">❮</button>
+                        <button class="next">❯</button>
+                    </div>
+                `;
+                showCarousel();
+            }
+        }
+    </script>
+</body>
+</html>
