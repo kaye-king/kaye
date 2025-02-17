@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subjects Taken</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: blue;
+        }
+        .pagination a.active {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="header">Profile Page</div>
@@ -19,7 +35,7 @@
         </div>
         <div class="content">
             <h2>Subjects Taken</h2>
-            <table class="info-table">
+            <table class="info-table" id="subjectsTable">
                 <tr>
                     <th>Subject Name</th>
                     <th>Description</th>
@@ -166,15 +182,68 @@
                     <td>3</td>
                 </tr>
             </table>
-            <div class="pagination">
-                <a href="#">&lt;</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">&gt;</a>
-            </div>
+            <div class="pagination" id="pagination"></div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        const subjectsPerPage = 6;
+        const subjectsTable = document.getElementById('subjectsTable');
+        const pagination = document.getElementById('pagination');
+        const rows = subjectsTable.getElementsByTagName('tr');
+        const totalPages = Math.ceil((rows.length - 1) / subjectsPerPage); // Exclude header row
+
+        function showPage(page) {
+            const start = (page - 1) * subjectsPerPage + 1; // Start from 1 to skip header
+            const end = start + subjectsPerPage - 1;
+
+            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header
+                rows[i].classList.add('hidden'); // Hide all rows
+            }
+
+            for (let i = start; i <= end && i < rows.length; i++) {
+                rows[i].classList.remove('hidden'); // Show only the rows for the current page
+            }
+
+            updatePagination(page);
+        }
+
+        function updatePagination(currentPage) {
+            pagination.innerHTML = ''; // Clear existing pagination
+            for (let i = 1; i <= totalPages; i++) {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.innerText = i;
+                link.className = (i === currentPage) ? 'active' : '';
+                link.onclick = (function(page) {
+                    return function() {
+                        showPage(page);
+                    };
+                })(i);
+                pagination.appendChild(link);
+            }
+            // Add previous and next buttons
+            if (currentPage > 1) {
+                const prevLink = document.createElement('a');
+                prevLink.href = '#';
+                prevLink.innerText = '<';
+                prevLink.onclick = function() {
+                    showPage(currentPage - 1);
+                };
+                pagination.insertBefore(prevLink, pagination.firstChild);
+            }
+            if (currentPage < totalPages) {
+                const nextLink = document.createElement('a');
+                nextLink.href = '#';
+                nextLink.innerText = '>';
+                nextLink.onclick = function() {
+                    showPage(currentPage + 1);
+                };
+                pagination.appendChild(nextLink);
+            }
+        }
+
+        // Show the first page on initial load
+        showPage(1);
+    </script>
 </body>
 </html>
