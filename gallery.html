@@ -5,7 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
     <link rel="stylesheet" href="styles.css">
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: center;
+            padding: 1em 0;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            padding: 15px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+        }
+        .sidebar a.active {
+            font-weight: bold;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-image {
+            min-width: 100%;
+            height: auto;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="header">Kaye M. Leyga</div>
@@ -63,7 +122,7 @@
                             <img src="dd.jpg" alt="Image 9" class="carousel-image">
                             <img src="image10.jpg" alt="Image 10" class="carousel-image">
                         </div>
-                        <button class="prev">❮ </button>
+                        <button class="prev">❮</button>
                         <button class="next">❯</button>
                     </div>
                 `;
