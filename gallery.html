@@ -5,18 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
     <link rel="stylesheet" href="styles.css">
-   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 15px;
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+        }
+        .sidebar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-image {
+            min-width: 100%;
+            height: auto;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="header">Kaye M. leyga</div>
+    <div class="header">Kaye M. Leyga</div>
     <div class="container">
         <div class="sidebar">
-            <a href="about.html" >About Me</a>
+            <a href="about.html">About Me</a>
             <a href="subjects.html">Subjects Taken</a>
             <a href="enrolled.html">Enrolled Subjects</a>
             <a href="contact.html">Contact Me</a>
             <a href="favorites.html">Favorites</a>
-            <a href="gallery.html"class="active">Gallery</a>
+            <a href="gallery.html" class="active">Gallery</a>
         </div>
         <div class="content"></div>
     </div>
@@ -52,24 +117,27 @@
                     <h2>Gallery</h2>
                     <div class="carousel">
                         <div class="carousel-images">
-                   <img src="kk.jpg" alt="Image 1" class="carousel-image">
-                        <img src="mm.jpg" alt="Image 2" class="carousel-image">
-                        <img src="nn.jpg" alt="Image 3" class="carousel-image">
-                        <img src="pp.jpg" alt="Image 4" class="carousel-image">
-                        <img src="aa.jpg" alt="Image 5" class="carousel-image">
-                        <img src="a.jpg" alt="Image 6" class="carousel-image">
-                        <img src="bb.jpg" alt="Image 7" class="carousel-image">
-                        <img src="cc.jpg" alt="Image 8" class="carousel-image">
-                        <img src="dd.jpg" alt="Image 9" class="carousel-image">
-                        <img src="image10.jpg" alt="Image 10" class="carousel-image">
+                            <img src="kk.jpg" alt="Image 1" class="carousel-image">
+                            <img src="mm.jpg" alt="Image 2" class="carousel-image">
+                            <img src="nn.jpg" alt="Image 3" class="carousel-image">
+                            <img src="pp.jpg" alt="Image 4" class="carousel-image">
+                            <img src="aa.jpg" alt="Image 5" class="carousel-image">
+                            <img src="a.jpg" alt="Image 6" class="carousel-image">
+                            <img src="bb.jpg" alt="Image 7" class="carousel-image">
+                            <img src="cc.jpg" alt="Image 8" class="carousel-image">
+                            <img src="dd.jpg" alt="Image 9" class="carousel-image">
+                            <img src="image10.jpg" alt="Image 10" class="carousel-image">
                         </div>
-                        <button class="prev">❮</button>
+                        <button class="prev">❮ </button>
                         <button class="next">❯</button>
                     </div>
                 `;
                 showCarousel();
             }
         }
+
+        // Call showSection to display the gallery when the page loads
+        showSection('gallery');
     </script>
 </body>
 </html>
