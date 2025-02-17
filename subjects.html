@@ -186,7 +186,7 @@
         </div>
     </div>
     <script>
-        const subjectsPerPage = 6;
+        const subjectsPerPage = 8; // 8 subjects per page
         const subjectsTable = document.getElementById('subjectsTable');
         const pagination = document.getElementById('pagination');
         const rows = subjectsTable.getElementsByTagName('tr');
@@ -209,9 +209,19 @@
 
         function updatePagination(currentPage) {
             pagination.innerHTML = ''; // Clear existing pagination
-            for (let i = 1; i <= totalPages; i++) {
+            const maxVisiblePages = 3; // Maximum number of visible page links
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            // Adjust startPage if endPage is less than maxVisiblePages
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            // Create page links
+            for (let i = startPage; i <= endPage; i++) {
                 const link = document.createElement('a');
-                link.href = '#';
+                link .href = '#';
                 link.innerText = i;
                 link.className = (i === currentPage) ? 'active' : '';
                 link.onclick = (function(page) {
@@ -221,20 +231,22 @@
                 })(i);
                 pagination.appendChild(link);
             }
+
             // Add previous and next buttons
             if (currentPage > 1) {
                 const prevLink = document.createElement('a');
                 prevLink.href = '#';
-                prevLink.innerText = '<';
+                prevLink.innerText = 'Previous';
                 prevLink.onclick = function() {
                     showPage(currentPage - 1);
                 };
                 pagination.insertBefore(prevLink, pagination.firstChild);
             }
+
             if (currentPage < totalPages) {
                 const nextLink = document.createElement('a');
                 nextLink.href = '#';
-                nextLink.innerText = '>';
+                nextLink.innerText = 'Next';
                 nextLink.onclick = function() {
                     showPage(currentPage + 1);
                 };
@@ -242,7 +254,7 @@
             }
         }
 
-        // Show the first page on initial load
+        // Initialize the first page
         showPage(1);
     </script>
 </body>
